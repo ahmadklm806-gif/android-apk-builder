@@ -10,8 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - name: Clone Repository Direct
+      run: |
+        git config --global init.defaultBranch main
+        git init
+        git remote add origin https://github.com/${{ github.repository }}.git
+        git fetch origin
+        git checkout -b main origin/main || git checkout main
 
     - name: Set up JDK 17
       uses: actions/setup-java@v5
